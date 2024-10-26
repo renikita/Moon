@@ -1,4 +1,4 @@
-package com.development.moon.dev.service.db;
+package com.development.moon.dev.usercase;
 
 import com.development.moon.dev.model.Role;
 import com.development.moon.dev.repository.RoleRepository;
