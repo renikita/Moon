@@ -1,7 +1,9 @@
 import './index.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
+import './styles/fonts.css'
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import Home from './pages/home/Home';
 
 function App() {
   return (
