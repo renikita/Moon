@@ -1,36 +1,36 @@
-import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
-import logo from '../../assets/images/logo.png'
-import React from 'react'
  
+import logo from '../../assets/images/logo.png'
+import './header.css'
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+ 
+const Header = () => {
+  const [isMobile, setIsMobile] = useState(false);
 
+  const handleToggleMenu = () => {
+    setIsMobile(!isMobile);
+  };
 
-export default function Header() {
   return (
-    <header>
-        <div>
-            <span className='logo'>Moon</span>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                            <div class="container-fluid">
-                                              <img src={logo}/>
-                                                <a class="navbar-brand" href="#">Moon</a>
-                                                
-                                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                                                    <span class="navbar-toggler-icon"></span>
-                                                </button>
-                                                <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
-                                                    <div class="navbar-nav">
-                                                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                                                        <a class="nav-link" href="#">Features</a>
-                                                        <a class="nav-link" href="#">Pricing</a>
-                                                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </nav>
-                                    
-        </div>
+    <nav className="navbar">
+      <div className="logo">
+         <img src={logo} alt='logo'/>
+      </div>
+      <ul className={isMobile ? 'nav-links-mobile' : 'nav-links'}>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About us</Link></li>
+          <li><Link to="/services">Services</Link></li>
+          <li><Link to="/projects">Projects</Link></li>
+          <li><Link to="/career">Career</Link></li>
+          <li><Link to="/contacts">Contacts</Link></li>
+      </ul>
+      <button className="mobile-menu-icon" onClick={handleToggleMenu}>
+        {isMobile ? '✖️' : '☰'}
+      </button>
+    </nav>
+  );
+};
 
-    </header>
-  )
-}
+export default Header;
+
  
