@@ -1,0 +1,79 @@
+.section-one{
+    width: 1920px auto;
+    height: 1167px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 50px;
+    background-image: url('img/person.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.content{
+    z-index: 2;
+}
+h1{
+    font-size: 4rem;
+    font-family: 'Montserrat';
+    color: white;
+    font-weight: 700;
+    margin: 0;
+    left: 350px;
+    top: 262px;
+    position: absolute;
+}
+.top-btn{
+    width: 190px;
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    top: 569px;
+    left: 350px;
+    
+}
+.contact-btn,.services-btn{
+    display: flex;
+    /* width: 190px;
+    height: 60px; */
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 24px;
+    font-family: 'Montserrat';
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    font-weight: 700;
+    line-height: 29px;
+    text-decoration: none;
+}
+.contact-btn{
+    background-color: #7F9DDD; 
+    color: black;
+}
+.services-btn{
+    background-color: black;
+    color: #7F9DDD;
+}
+.contact-btn:hover{
+    background-color: #357ABD;
+}
+.services-btn:hover{
+    background-color: #333;
+}
+.about{
+    font-size: 12.5rem;
+    font-weight: 700;
+    font-family: 'Montserrat';
+    color: white;
+    position: absolute;
+    /* font-size: 200px; */
+    line-height: 244px;
+    letter-spacing: 0%;
+    text-align: left;
+    margin: 0;
+    left: 10px;
+    bottom: -50px;
+}
