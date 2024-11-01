@@ -1,79 +1,160 @@
-.section-one{
-    width: 1920px auto;
-    height: 1167px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0 50px;
-    background-image: url('img/person.png');
-    background-size: cover;
-    background-position: center;
-    position: relative;
+.section-one {
+  width: 100%;
+  max-width: 1920px;
+  height: 1167px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 50px;
+  background-image: url("img/person.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
 }
-.content{
-    z-index: 2;
+.content {
+  z-index: 2;
 }
-h1{
-    font-size: 4rem;
-    font-family: 'Montserrat';
-    color: white;
-    font-weight: 700;
-    margin: 0;
-    left: 350px;
-    top: 262px;
-    position: absolute;
+h1 {
+  font-size: 4rem;
+
+  color: white;
+  font-weight: 700;
+  margin: 0;
+  left: 350px;
+  top: 262px;
+  position: absolute;
 }
-.top-btn{
-    width: 190px;
-    display: flex;
-    gap: 20px;
-    position: absolute;
-    top: 569px;
-    left: 350px;
-    
+.top-btn {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: 569px;
+  left: 350px;
 }
-.contact-btn,.services-btn{
-    display: flex;
-    /* width: 190px;
+.contact-btn,
+.services-btn {
+  display: flex;
+  /* width: 190px;
     height: 60px; */
-    justify-content: center;
-    padding: 10px 20px;
-    font-size: 24px;
-    font-family: 'Montserrat';
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-    font-weight: 700;
-    line-height: 29px;
-    text-decoration: none;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-family: "Montserrat";
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  font-weight: 700;
+  line-height: 29px;
+  text-decoration: none;
 }
-.contact-btn{
-    background-color: #7F9DDD; 
-    color: black;
+.contact-btn {
+  background-color: #7f9ddd;
+  color: black;
 }
-.services-btn{
-    background-color: black;
-    color: #7F9DDD;
+.services-btn {
+  background-color: black;
+  color: #7f9ddd;
 }
-.contact-btn:hover{
-    background-color: #357ABD;
+.contact-btn:hover {
+  background-color: #357abd;
 }
-.services-btn:hover{
-    background-color: #333;
+.services-btn:hover {
+  background-color: #333;
 }
-.about{
-    font-size: 12.5rem;
-    font-weight: 700;
-    font-family: 'Montserrat';
-    color: white;
-    position: absolute;
-    /* font-size: 200px; */
-    line-height: 244px;
-    letter-spacing: 0%;
-    text-align: left;
-    margin: 0;
-    left: 10px;
-    bottom: -50px;
+.about {
+  font-size: 12.5rem;
+  font-weight: 700;
+  font-family: "Montserrat Alternates";
+  color: white;
+  position: absolute;
+  /* font-size: 200px; */
+  line-height: 244px;
+  letter-spacing: 0%;
+  text-align: left;
+  margin: 0;
+  left: 10px;
+  bottom: -50px;
+}
+
+.section-two {
+  width: 100%;
+  max-width: 1920px;
+  height: 816px;
+  display: flex;
+  background-color: white;
+}
+.teams-img {
+  width: 580px;
+  height: 541px;
+  position: absolute;
+  left: 350px;
+  margin-top: 81px;
+}
+.section-two h2 {
+  position: absolute;
+  width: 472px;
+  height: 118px;
+  left: 949px;
+  top: 1412px;
+
+  font-family: Montserrat Alternates;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 59px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.section-two p {
+  position: absolute;
+  width: 621px;
+  height: 208px;
+  left: 949px;
+  top: 1543px;
+  color: rgb(0, 0, 0);
+  font-family: Jost;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.about-btn {
+  width: 140px;
+  /* display: flex; */
+  /* gap: 20px; */
+  position: absolute;
+  /* display: flex; */
+  background-color: #7f9ddd;
+  /* justify-content: center; */
+  padding: 10px 20px;
+  font-size: 24px;
+  font-family: "Montserrat";
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  font-weight: 700;
+  /* line-height: 29px; */
+  text-decoration: none;
+  color: white;
+  left: 949px;
+  margin-top: 500px;
+}
+.section-two h1 {
+  position: absolute;
+  width: 908px;
+  height: 244px;
+  left: 980px;
+  margin-top: 1627px;
+  color: rgb(53, 67, 94);
+  font-family: Montserrat Alternates;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 244px;
+  letter-spacing: 0%;
+  text-align: left;
 }
