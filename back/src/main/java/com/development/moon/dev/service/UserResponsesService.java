@@ -14,4 +14,6 @@ public interface UserResponsesService {
     UserResponses findById(Integer id);
 
     public List<UserResponses> findAll();
+
+    boolean deleteById(Integer id);
 }

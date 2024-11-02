@@ -27,4 +27,7 @@ public class UserResponsesServicedb implements UserResponsesService {
     public List<UserResponses> findAll() {
         return urs.findAll();
     }
+
+    @Override
+    public boolean deleteById(Integer id) { urs.deleteById(id); return urs.existsById(id) ? true : false; }
 }
