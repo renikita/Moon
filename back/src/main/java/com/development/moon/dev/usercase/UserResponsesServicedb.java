@@ -29,5 +29,5 @@ public class UserResponsesServicedb implements UserResponsesService {
     }
 
     @Override
-    public boolean deleteById(Integer id) { urs.deleteById(id); return urs.existsById(id) ? true : false; }
+    public boolean deleteById(Integer id) { urs.deleteById(id); return urs.existsById(id); }
 }

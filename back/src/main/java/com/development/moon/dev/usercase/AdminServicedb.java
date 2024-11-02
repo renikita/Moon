@@ -28,4 +28,7 @@ public class AdminServicedb implements AdminService {
     public List<Admin> findAll() {
         return adminRepository.findAll();
     }
+
+    @Override
+    public boolean deleteById(Integer id) { adminRepository.deleteById(id); return adminRepository.existsById(id); }
 }

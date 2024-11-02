@@ -13,4 +13,6 @@ public interface RoleService {
     Role findById(Integer id);
 
     public List<Role> findAll();
+
+    boolean deleteById(Integer id);
 }

@@ -1,6 +1,7 @@
 package com.development.moon.dev.usercase;
 
 import com.development.moon.dev.model.Role;
+import com.development.moon.dev.repository.AdminRepository;
 import com.development.moon.dev.repository.RoleRepository;
 import com.development.moon.dev.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class RoleServicedb implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private AdminRepository adminRepository;
 
     @Override
     public Role save(Role role) {
@@ -28,4 +31,7 @@ public class RoleServicedb implements RoleService {
     public List<Role> findAll() {
         return roleRepository.findAll();
     }
+
+    @Override
+    public boolean deleteById(Integer id) { roleRepository.deleteById(id); return adminRepository.existsById(id); }
 }

@@ -13,4 +13,6 @@ public interface AdminService {
     Admin findById(Integer id);
 
     public List<Admin> findAll();
+
+    boolean deleteById(Integer id);
 }
