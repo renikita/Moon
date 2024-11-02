@@ -1,8 +1,10 @@
 package com.development.moon.dev.controller;
 
+import com.development.moon.dev.model.Admin;
 import com.development.moon.dev.model.UserResponses;
 import com.development.moon.dev.service.UserResponsesService;
 import com.development.moon.dev.usercase.exception.UserResponsesValidationException;
+import com.development.moon.dev.usercase.validation.UserResValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +18,12 @@ public class UserResponsesController {
     @Autowired
     private UserResponsesService userResponsesService;
 
+    @Autowired
+    UserResValidator userResValidator;
+
     @PostMapping("/user")
     UserResponses UR(@RequestBody UserResponses userResponses) {
+        userResValidator.validateNameTheSameUserResponses(userResponses);
         return userResponsesService.save(userResponses);
     }
 
@@ -33,6 +39,18 @@ public class UserResponsesController {
             throw new UserResponsesValidationException("User with id " + id + " not found");
         }
         return userResponses;
+    }
+
+    @PutMapping("/user/{id}")
+    UserResponses updateUserById(@RequestBody UserResponses userResponses, @PathVariable Integer id){
+        UserResponses UpdateUserResponses = userResponsesService.findById(id);
+        userResValidator.validateCheckUserRes(UpdateUserResponses);
+        UpdateUserResponses.setName(userResponses.getName());
+        UpdateUserResponses.setEmail(userResponses.getEmail());
+        UpdateUserResponses.setNumber(userResponses.getNumber());
+        UpdateUserResponses.setMessage_res(userResponses.getMessage_res());
+        UpdateUserResponses.setResponse_time(userResponses.getResponse_time());
+        return userResponsesService.save(UpdateUserResponses);
     }
 
     @DeleteMapping("user/{id}")

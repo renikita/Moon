@@ -15,4 +15,7 @@ public interface AdminService {
     public List<Admin> findAll();
 
     boolean deleteById(Integer id);
+
+    Admin findByReg(String login);
+
 }

@@ -31,4 +31,10 @@ public class AdminServicedb implements AdminService {
 
     @Override
     public boolean deleteById(Integer id) { adminRepository.deleteById(id); return adminRepository.existsById(id); }
+
+    @Override
+    public Admin findByReg(String login)
+    {
+        return adminRepository.findByReg(login);
+    }
 }

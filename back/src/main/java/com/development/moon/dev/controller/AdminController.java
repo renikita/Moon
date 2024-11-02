@@ -3,6 +3,8 @@ package com.development.moon.dev.controller;
 import com.development.moon.dev.model.Admin;
 import com.development.moon.dev.service.AdminService;
 import com.development.moon.dev.usercase.exception.AdminValidationException;
+import com.development.moon.dev.usercase.port.PasswordEncoder;
+import com.development.moon.dev.usercase.validation.AdminValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,20 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @Autowired
+    AdminValidator adminValidator;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public AdminController(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @PostMapping("/admin")
     Admin adminSave(@RequestBody Admin admin){
+        adminValidator.validateCreateAdmin(admin);
+        adminValidator.validateNameTheSameAdmin(admin);
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminService.save(admin);
     }
 
@@ -30,9 +44,7 @@ public class AdminController {
     @GetMapping("/admin/{id}")
     Admin getAdminById(@PathVariable Integer id){
         Admin admin = adminService.findById(id);
-        if(admin == null){
-            throw new AdminValidationException("Admin with id " + id + " not found.");
-        }
+        adminValidator.validateCreateAdmin(admin);
 
         return admin;
     }
@@ -40,22 +52,18 @@ public class AdminController {
     @PutMapping("/admin/{id}")
     Admin updateAdminById(@RequestBody Admin admin, @PathVariable Integer id){
         Admin UpdateAdmin = adminService.findById(id);
-        if(UpdateAdmin == null){
-            throw new AdminValidationException("Admin with id " + id + " not found.");
-        }
+        adminValidator.validateCreateAdmin(UpdateAdmin);
         UpdateAdmin.setName(admin.getName());
         UpdateAdmin.setRole(admin.getRole());
         UpdateAdmin.setLogin(admin.getLogin());
-        UpdateAdmin.setPassword(admin.getPassword());
+        UpdateAdmin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminService.save(UpdateAdmin);
     }
 
     @DeleteMapping("/admin/{id}")
     String deleteAdminById(@PathVariable Integer id){
         Admin admin = adminService.findById(id);
-        if(admin == null){
-            throw new AdminValidationException("Admin with id " + id + " not found.");
-        }
+        adminValidator.validateCreateAdmin(admin);
         return adminService.deleteById(id) ? "Success!" : "Deleting not completed.";
     }
 
