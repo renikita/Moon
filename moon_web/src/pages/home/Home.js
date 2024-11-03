@@ -44,6 +44,21 @@ export default function Home() {
         </Link>
         <h1>Partners</h1>
       </div>
+      <div className="section-three">
+        <h2>Why should you trust us?</h2>
+        <p>
+          At Moon, we work with a variety of partners to deliver best-in-class
+          application development solutions. Our partners include leading
+          technology companies, innovative startups, and industry experts who
+          share our passion for quality and innovation. Together, we ensure that
+          our customers have access to the most advanced and reliable tools,
+          platforms, and services to turn their app ideas into reality. By
+          working closely with our trusted partners, Moon guarantees
+          cutting-edge technology and seamless integration for every project.
+        </p>
+        <div className="map"/> 
+        <h1>Our Flow</h1>
+      </div>
     </div>
   );
 }
