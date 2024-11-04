@@ -164,6 +164,7 @@ h1 {
   height: 1850px;
   display: flex;
   background: rgb(53, 67, 94);
+  overflow: hidden;
 }
 .section-three h2 {
   color: rgb(255, 255, 255);
@@ -216,4 +217,32 @@ h1 {
   line-height: 244px;
   letter-spacing: 0%;
   text-align: left;
+}
+.section-four {
+  width: 100%;
+  max-width: 1920px;
+  height: 1052px;
+  background: rgb(127, 157, 221);
+  overflow: hidden;
+}
+.carousel-service{
+  width: 1053px;
+  height: 475px;
+  position: relative;
+  left: 435px;
+  padding-top: 190px;
+   
+}
+.carousel-service img{
+  width: 1053px;
+  height: 475px;
+}
+.carousel-service button{
+  font-size: 26px;
+   border-radius: 15px;
+  width: 40px;
+  height: 40px;
+  left: 700px;
+  bottom: -50px;
+  position: relative;
 }

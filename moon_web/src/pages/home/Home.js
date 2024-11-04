@@ -1,11 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+ 
+import Carousel from "./Carousel";
 import "./home.css";
 import "./home_media.css";
 import "../../styles/fonts.css";
 import teams from "./img/teams.png";
 
+
 export default function Home() {
+  const servImg = [
+    require('./img/service1.png'),
+    require('./img/service2.png'),
+    require('./img/service3.png'),
+    require('./img/service4.png'),
+    require('./img/service5.png'),
+    require('./img/service6.png'),
+     
+  ];
+  const altText =[
+    'image1',
+    'image2',
+    'image3',
+    'image4',
+    'image5',
+    'image6'
+  ];
+   
   return (
     <div>
       <div className="section-one">
@@ -56,8 +77,11 @@ export default function Home() {
           working closely with our trusted partners, Moon guarantees
           cutting-edge technology and seamless integration for every project.
         </p>
-        <div className="map"/> 
+        <div className="map" />
         <h1>Our Flow</h1>
+      </div>
+      <div className="section-four">
+      <Carousel images={servImg} altText={altText} customClass="carousel-service" />
       </div>
     </div>
   );
