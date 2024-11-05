@@ -1,12 +1,10 @@
 package com.development.moon.dev.controller;
 
 import com.development.moon.dev.model.Admin;
-import com.development.moon.dev.model.LoginRequest;
+import com.development.moon.dev.model.dto.LoginRequest;
 import com.development.moon.dev.service.AdminService;
-import com.development.moon.dev.usercase.port.PasswordEncoder;
 import com.development.moon.dev.usercase.validation.AdminValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

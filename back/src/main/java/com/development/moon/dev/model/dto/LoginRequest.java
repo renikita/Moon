@@ -1,4 +1,4 @@
-package com.development.moon.dev.model;
+package com.development.moon.dev.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
