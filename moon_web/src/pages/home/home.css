@@ -218,6 +218,21 @@ h1 {
   letter-spacing: 0%;
   text-align: left;
 }
+.section-three h3 {
+  position: relative;
+  width: 594px;
+  height: 49px;
+  left: 970px;
+  top: 1500px;
+
+  color: rgb(255, 255, 255);
+  font-family: Montserrat Alternates;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 49px;
+  letter-spacing: 0%;
+  text-align: left;
+}
 .section-four {
   width: 100%;
   max-width: 1920px;
@@ -225,24 +240,118 @@ h1 {
   background: rgb(127, 157, 221);
   overflow: hidden;
 }
-.carousel-service{
+.carousel-service {
   width: 1053px;
   height: 475px;
   position: relative;
   left: 435px;
   padding-top: 190px;
-   
 }
-.carousel-service img{
+.carousel-service img {
   width: 1053px;
   height: 475px;
 }
-.carousel-service button{
-  font-size: 26px;
-   border-radius: 15px;
-  width: 40px;
-  height: 40px;
-  left: 700px;
+.carousel-service button {
+  border-radius: 17px;
+  width: 50px;
+  height: 50px;
+  left: 1010px;
   bottom: -50px;
+  margin: 20px;
+  border: 2px solid rgb(53, 67, 94);
+  border-radius: 20px;
   position: relative;
+}
+.section-four h1 {
+  position: relative;
+  width: 1034px;
+  height: 244px;
+  left: 886px;
+  margin-top: 121px;
+  color: white;
+  font-family: Montserrat Alternates;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 244px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.section-five {
+  width: 100%;
+  max-width: 1920px;
+  height: 898px;
+  background: white;
+  overflow: hidden;
+}
+.section-five h3 {
+  position: relative;
+  width: 575px;
+  height: 78px;
+  left: 345px;
+  top: 158px;
+  color: rgb(0, 0, 0);
+  font-family: Montserrat Alternates;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 78px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.carousel-feedback {
+  width: 100%;
+  height: 314px;
+  position: relative;
+  left: 350px;
+  top: 293px;
+}
+.carousel-feedback img {
+  width: 1133px;
+  height: 314px;
+  position: relative;
+}
+.carousel-feedback button {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  left: 1110px;
+  margin: 20px;
+  bottom: 530px;
+
+  border: 2px solid rgb(53, 67, 94);
+  border-radius: 20px;
+}
+.section-five h1 {
+  width: 446px;
+  height: 244px;
+  left: 0;
+  color: rgb(53, 67, 94);
+  font-family: Montserrat Alternates;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 244px;
+  letter-spacing: 0%;
+  text-align: left;
+  position: relative;
+  margin-top: 50px;
+}
+.section-six {
+  width: 100%;
+  max-width: 1920px;
+  height: 1273px;
+  background: rgb(53, 67, 94);
+}
+.section-six h2 {
+  position: relative;
+  width: 956px;
+  height: 78px;
+  left: 350px;
+  top: 121px;
+  color: rgb(255, 255, 255);
+  font-family: Montserrat Alternates;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 78px;
+  letter-spacing: 0%;
+  text-align: left;
+  margin-bottom: 200px;
 }

@@ -1,32 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
- 
+
 import Carousel from "./Carousel";
+import FAQ from "./FAQ";
 import "./home.css";
 import "./home_media.css";
 import "../../styles/fonts.css";
 import teams from "./img/teams.png";
 
-
 export default function Home() {
   const servImg = [
-    require('./img/service1.png'),
-    require('./img/service2.png'),
-    require('./img/service3.png'),
-    require('./img/service4.png'),
-    require('./img/service5.png'),
-    require('./img/service6.png'),
-     
+    require("./img/service1.png"),
+    require("./img/service2.png"),
+    require("./img/service3.png"),
+    require("./img/service4.png"),
+    require("./img/service5.png"),
+    require("./img/service6.png"),
   ];
-  const altText =[
-    'image1',
-    'image2',
-    'image3',
-    'image4',
-    'image5',
-    'image6'
+  const feedImg = [
+    require("./img/feedback1.png"),
+    require("./img/feedback2.png"),
+    require("./img/feedback3.png"),
+    require("./img/feedback4.png"),
+    require("./img/feedback5.png"),
   ];
-   
+  const altText = ["image1", "image2", "image3", "image4", "image5", "image6"];
+
   return (
     <div>
       <div className="section-one">
@@ -78,10 +77,29 @@ export default function Home() {
           cutting-edge technology and seamless integration for every project.
         </p>
         <div className="map" />
+        <h3>Map of our partners in 2024</h3>
         <h1>Our Flow</h1>
       </div>
       <div className="section-four">
-      <Carousel images={servImg} altText={altText} customClass="carousel-service" />
+        <Carousel
+          images={servImg}
+          altText={altText}
+          customClass="carousel-service"
+        />
+        <h1>Feedback</h1>
+      </div>
+      <div className="section-five">
+        <h3>What clients say</h3>
+        <Carousel
+          images={feedImg}
+          altText={altText}
+          customClass="carousel-feedback"
+        />
+        <h1>FAQ</h1>
+      </div>
+      <div className="section-six">
+        <h2>Frequently Asked Questions</h2>
+        <FAQ />
       </div>
     </div>
   );
