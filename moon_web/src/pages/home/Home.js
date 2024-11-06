@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Carousel from "./Carousel";
-import FAQ from "./FAQ";
+import FAQ from "./faq/FAQ";
 import "./home.css";
 import "./home_media.css";
 import "../../styles/fonts.css";
