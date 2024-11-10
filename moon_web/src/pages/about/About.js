@@ -1,5 +1,9 @@
 import React from "react";
+import ClientForm from "../../modules/clientForm/ClientForm";
 
 export default function About() {
-  return <div>About</div>;
+  return <div>
+    About
+  <ClientForm/>
+  </div>;
 }

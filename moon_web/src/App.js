@@ -1,5 +1,6 @@
 import './index.css';
-import './styles/fonts.css'
+import './assets/styles/fonts.css'
+ 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Header from './layouts/header/Header';
 import Footer from './layouts/footer/Footer';

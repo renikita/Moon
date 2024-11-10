@@ -25,7 +25,7 @@
    transition: 0.3s ease;
    padding-top: 15px;
    padding-left: 15px;
-  /* position: relative; */
+  position: relative;
   /* margin: 20px; */
 }
 .question.open{
@@ -48,7 +48,7 @@
   transition: 0.3s ease;
   padding-left: 15px;
   /* padding-left: 20px; */
-  /* position: relative; */
+  /* position: absolute; */
 }
 .button {
   background: none;

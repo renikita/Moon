@@ -355,3 +355,17 @@ h1 {
   text-align: left;
   margin-bottom: 200px;
 }
+.section-six h4 {
+  width: 1130px;
+  height: 244px;
+  color: rgb(127, 157, 221);
+  font-family: Montserrat Alternates;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 244px;
+  letter-spacing: 0%;
+  text-align: left;
+  position: absolute;
+  left: 770px;
+  top: 6962px;
+}

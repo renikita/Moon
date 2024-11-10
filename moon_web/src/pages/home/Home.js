@@ -5,7 +5,7 @@ import Carousel from "./Carousel";
 import FAQ from "./faq/FAQ";
 import "./home.css";
 import "./home_media.css";
-import "../../styles/fonts.css";
+import "../../assets/styles/fonts.css";
 import teams from "./img/teams.png";
 
 export default function Home() {
@@ -100,6 +100,10 @@ export default function Home() {
       <div className="section-six">
         <h2>Frequently Asked Questions</h2>
         <FAQ />
+        <div><h4>Contact us</h4></div>
+      </div>
+      <div className="section-seven">
+        
       </div>
     </div>
   );
