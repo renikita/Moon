@@ -7,6 +7,7 @@ import "./home.css";
 import "./home_media.css";
 import "../../assets/styles/fonts.css";
 import teams from "./img/teams.png";
+import ClientForm from "../../modules/clientForm/ClientForm";
 
 export default function Home() {
   const servImg = [
@@ -103,7 +104,7 @@ export default function Home() {
         <div><h4>Contact us</h4></div>
       </div>
       <div className="section-seven">
-        
+        <ClientForm />
       </div>
     </div>
   );

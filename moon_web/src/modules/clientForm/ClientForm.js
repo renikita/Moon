@@ -60,8 +60,13 @@ export default function ClientForm() {
           </div>
         </div>
       </div>
-      <div className="form-container">
+
+      {/* <div className="form-container">
         <div className="form-box">
+          <div className="form-left">
+
+            
+          </div>
           <h2>Let’s work together</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -112,7 +117,62 @@ export default function ClientForm() {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
+    <div className="form-container">
+      <h2>Let’s work together</h2>
+      <form onSubmit={handleSubmit} className="form-box">
+        <div className="form-left">
+          <div className="form-group">
+            <label>Your Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Your Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="E-mail"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Your Phone Number</label>
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="Phone number"
+            />
+          </div>
+        </div>
+        <div className="form-right">
+          <div className="form-group-message">
+            <label>A few words about you or your project</label>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Message"
+              rows="4"
+              required
+            />
+          </div>
+        </div>
+      
+      </form>  <button type="submit" className="submit-button">
+          Send
+        </button>
+    </div>
     </div>
   );
 }

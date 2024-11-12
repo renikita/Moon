@@ -369,3 +369,9 @@ h1 {
   left: 770px;
   top: 6962px;
 }
+.section-sevev {
+  width: 100%;
+  max-width: 1920px;
+   
+  background: rgb(53, 67, 94);
+}
