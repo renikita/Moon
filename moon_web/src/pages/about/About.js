@@ -1,9 +1,12 @@
 import React from "react";
-import ClientForm from "../../modules/clientForm/ClientForm";
+import "./about.css";
 
 export default function About() {
-  return <div>
-    About
-  <ClientForm/>
-  </div>;
+  return (
+    <div>
+      <div className="container-about">
+        
+      </div>
+    </div>
+  );
 }
