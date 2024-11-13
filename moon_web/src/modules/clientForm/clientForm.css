@@ -93,25 +93,32 @@ h4 {
   flex-direction: column;
   align-items: flex-start;
 }
+.top-rectangle {
+  width: 958px;
+  height: 29px;
+  border-radius: 50px 0px 0px 0px;
+  position: absolute;
+  background: rgb(53, 67, 94);
+  top: -30px;
+}
 .form-box {
   display: flex;
-  gap: 20px;  
+  gap: 20px;
 }
 .form-left,
 .form-right {
   display: flex;
   flex-direction: column;
 }
-.form-box h2 {
+.form-container h2 {
   width: 493px;
   height: 59px;
   color: rgb(0, 0, 0);
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates";
   font-size: 48px;
   font-weight: 700;
   line-height: 59px;
   letter-spacing: 0%;
-  margin-bottom: 105px;
 }
 
 .form-group {
@@ -119,12 +126,29 @@ h4 {
 }
 
 .form-group label {
-  font-size: 14px;
+  font-family: Jost;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0%;
+  text-align: left;
   color: rgb(0, 0, 0);
   display: block;
   margin-bottom: 5px;
 }
-
+.form-group-message label {
+  font-family: Jost;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 29px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.form-group input::placeholder,
+.form-group-message textarea::placeholder {
+  color: rgb(112, 138, 195);
+   padding-left: 10px;
+}
 .form-group input,
 .form-group-message textarea {
   width: 270px;
@@ -134,32 +158,55 @@ h4 {
   border: none;
   padding: 10px;
   color: #ffffff;
-  font-size: 16px;
+
+  font-family: Jost;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 35px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.form-group input {
+  margin-bottom: 51px;
 }
 
 .form-group-message {
   margin-bottom: 20px;
+  margin-left: 53px;
 }
 
 .form-group-message textarea {
-  width: 493px;
-  height: 150px;
+  width: 270px;
+  height: 390px;
   resize: none;
 }
-
+.form-right {
+  margin-top: 29px;
+}
+.form-left {
+  margin-top: 24px;
+}
 .submit-button {
-  width: 120px;
-  height: 50px;
+  width: 190px;
+  height: 60px;
   background-color: black;
-  color: white;
+
   border: none;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 24px;
+  line-height: 29px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 20px;
-  position: relative;
-  left: 100px;
+  color: rgb(255, 255, 255);
+  font-family: Montserrat Alternates;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0%;
+
+  position: absolute;
+  left: 70px;
+  bottom: 157px;
 }
 
 .submit-button:hover {
