@@ -1,0 +1,51 @@
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .carousel-profiles {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out; 
+  }
+  
+  .profile-card {
+    background-color: #2e3a59;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    width: 200px; 
+    transition: transform 0.5s ease-in-out;  
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .profile-name {
+    font-size: 1.2em;
+    margin: 10px 0 5px;
+  }
+  
+  .profile-role {
+    font-size: 0.9em;
+    color: #d1d5db;
+  }
+  
+  .carousel-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Додаємо плавний перехід для кнопок */
+  }
+
+  .carousel-button:hover {
+    color: #d1d5db; /* Зміна кольору при наведенні */
+  }

@@ -1,11 +1,32 @@
 import React from "react";
 import "./about.css";
+import AboutCarousel from "./aboutCarousel/AboutCarousel";
 import team2 from "./img/team2.png";
 import society from "./img/society.png";
 import smarttv from "./img/smart-tv.png";
 import report from "./img/report.png";
+import person1 from "./img/person1.png";
+import person2 from "./img/person2.png";
+import person3 from "./img/person3.png";
+import person4 from "./img/person4.png";
+import person5 from "./img/person5.png";
+import person6 from "./img/person6.png";
+import person7 from "./img/person7.png";
+import person8 from "./img/person8.png";
+import person9 from "./img/person9.png";
 
 export default function About() {
+  const profiles = [
+    { image: person1, name: 'James Anderson', role: 'CEO' },
+    { image: person2, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person3, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person4, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person5, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person6, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person7, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person8, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person9, name: 'Michael Brown', role: 'Backend team lead' },
+  ];
   return (
     <div>
       <div className="a-container">
@@ -77,7 +98,9 @@ export default function About() {
           </div>
           <h1 className="a-two-h1">Leadership</h1>
         </div>
-        <div className="a-section-three"></div>
+        <div className="a-section-three">
+          <AboutCarousel profiles={profiles} />
+        </div>
       </div>
     </div>
   );
