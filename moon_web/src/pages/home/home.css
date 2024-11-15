@@ -240,19 +240,19 @@ h1 {
   background: rgb(127, 157, 221);
   overflow: hidden;
 }
-.carousel-service {
+.h-carousel-service {
   width: 1053px;
   height: 475px;
   position: relative;
   left: 435px;
   padding-top: 190px;
 }
-.carousel-service img {
+.h-carousel-service img {
   width: 1053px;
   height: 475px;
 }
-.carousel-service button {
-  border-radius: 17px;
+.h-carousel-service button {
+ 
   width: 50px;
   height: 50px;
   left: 1010px;
@@ -260,7 +260,18 @@ h1 {
   margin: 20px;
   border: 2px solid rgb(53, 67, 94);
   border-radius: 20px;
+
+  background: rgb(217, 217, 217);
+  color: white;
+  /* font-size: 2em; */
+  cursor: pointer;
+  transition: color 0.3s ease;
+  border-radius: 20px;
   position: relative;
+}
+.h-carousel button img{
+  width: 20px;
+  height: 20px;
 }
 .section-four h1 {
   position: relative;

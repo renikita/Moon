@@ -85,7 +85,7 @@ export default function Home() {
         <Carousel
           images={servImg}
           altText={altText}
-          customClass="carousel-service"
+          customClass="h-carousel-service"
         />
         <h1>Feedback</h1>
       </div>
