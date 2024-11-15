@@ -37,8 +37,7 @@ h1 {
 .contact-btn,
 .services-btn {
   display: flex;
-  /* width: 190px;
-    height: 60px; */
+
   justify-content: center;
   padding: 10px 20px;
   font-size: 24px;
@@ -123,13 +122,10 @@ h1 {
   text-align: left;
 }
 .about-btn {
-  /* width: 140px; */
-  /* display: flex; */
-  /* gap: 20px; */
   position: absolute;
-  /* display: flex; */
+
   background-color: #7f9ddd;
-  /* justify-content: center; */
+
   padding: 10px 20px;
   font-size: 24px;
   font-family: "Montserrat Alternates";
@@ -138,7 +134,7 @@ h1 {
   transition: background-color 0.3s ease;
   border-radius: 5px;
   font-weight: 700;
-  /* line-height: 29px; */
+
   text-decoration: none;
   color: white;
   left: 949px;
@@ -252,7 +248,6 @@ h1 {
   height: 475px;
 }
 .h-carousel-service button {
- 
   width: 50px;
   height: 50px;
   left: 1010px;
@@ -263,13 +258,13 @@ h1 {
 
   background: rgb(217, 217, 217);
   color: white;
-  /* font-size: 2em; */
+
   cursor: pointer;
   transition: color 0.3s ease;
   border-radius: 20px;
   position: relative;
 }
-.h-carousel button img{
+.h-carousel button img {
   width: 20px;
   height: 20px;
 }
@@ -383,6 +378,6 @@ h1 {
 .section-sevev {
   width: 100%;
   max-width: 1920px;
-   
+
   background: rgb(53, 67, 94);
 }

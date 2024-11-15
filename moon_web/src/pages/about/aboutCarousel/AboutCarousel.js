@@ -40,9 +40,7 @@ export default function AboutCarousel({ profiles, autoRotateInterval = 3000 }) {
 
   return (
     <div className="a-carousel">
-      <button className="a-carousel-button prev" onClick={prevProfile}>
-        <img src={leftarrow} alt="Previous" />
-      </button>
+      
       <div className="a-carousel-profiles">
         {visibleProfiles.map((profile, index) => (
           <div key={index} className="a-profile-card">
@@ -56,6 +54,9 @@ export default function AboutCarousel({ profiles, autoRotateInterval = 3000 }) {
           </div>
         ))}
       </div>
+      <button className="a-carousel-button prev" onClick={prevProfile}>
+        <img src={leftarrow} alt="Previous" />
+      </button>
       <button className="a-carousel-button next" onClick={nextProfile}>
         <img src={rightarrow} alt="Previous" />
       </button>

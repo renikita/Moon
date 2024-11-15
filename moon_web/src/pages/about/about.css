@@ -80,7 +80,6 @@
   left: 350px;
   top: 1366px;
 }
-/* FeaturesSection */
 
 .a-two-features-section {
   display: flex;
@@ -139,11 +138,38 @@
   letter-spacing: 0%;
   text-align: left;
 }
-.a-section-three{
-    background: rgb(53, 67, 94);
-    /* Rectangle 57 */
- width: 100%;
-max-width: 1920px;
-height: 1359px;
- 
+.a-section-three {
+  background: rgb(53, 67, 94);
+
+  width: 100%;
+  max-width: 1920px;
+  height: 1320px;
+}
+.a-three-h2 {
+  position: absolute;
+  width: 805px;
+  height: 156px;
+  left: 350px;
+  top: 2851px;
+  color: rgb(255, 255, 255);
+  font-family: Montserrat Alternates;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 78px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+.a-three-h1 {
+  position: absolute;
+  width: 1130px;
+  height: 244px;
+  left: 770px;
+  top: 3826px;
+  color: rgb(127, 157, 221);
+  font-family: Montserrat Alternates;
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 244px;
+  letter-spacing: 0%;
+  text-align: left;
 }

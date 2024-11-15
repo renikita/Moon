@@ -14,18 +14,19 @@ import person6 from "./img/person6.png";
 import person7 from "./img/person7.png";
 import person8 from "./img/person8.png";
 import person9 from "./img/person9.png";
+import ClientForm from "../../modules/clientForm/ClientForm";
 
 export default function About() {
   const profiles = [
-    { image: person1, name: 'James Anderson', role: 'CEO' },
-    { image: person2, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person3, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person4, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person5, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person6, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person7, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person8, name: 'Michael Brown', role: 'Backend team lead' },
-    { image: person9, name: 'Michael Brown', role: 'Backend team lead' },
+    { image: person1, name: "James Anderson", role: "CEO" },
+    { image: person2, name: "Emily Johnson", role: "Founder" },
+    { image: person3, name: "Michael Brown", role: "Backend team lead" },
+    { image: person4, name: "Olivia Smith", role: "Flutter team lead" },
+    { image: person5, name: "William Harris", role: "Android team lead" },
+    { image: person6, name: "Daniel Davis", role: "Project management team lead" },
+    { image: person7, name: "James Miller", role: "QA team lead" },
+    { image: person8, name: "Bruno Thompson", role: "Head of HR department" },
+    { image: person9, name: "Sophia Williams", role: "IOS team lead" },
   ];
   return (
     <div>
@@ -99,7 +100,14 @@ export default function About() {
           <h1 className="a-two-h1">Leadership</h1>
         </div>
         <div className="a-section-three">
+          <h2 className="a-three-h2">
+            They will be near and invested in for you
+          </h2>
           <AboutCarousel profiles={profiles} />
+          <h1 className="a-three-h1">Contact us</h1>
+        </div>
+        <div className="a-section-four">
+          <ClientForm />
         </div>
       </div>
     </div>
