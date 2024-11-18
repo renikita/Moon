@@ -5,6 +5,8 @@ import group2 from "./img/group2.png";
 import group3 from "./img/group3.png";
 import group4 from "./img/group4.png";
 import group5 from "./img/group5.png";
+import FAQ from "../../layouts/faq/FAQ";
+import ClientForm from "../../modules/clientForm/ClientForm";
 
 export default function Services() {
   return (
@@ -48,13 +50,71 @@ export default function Services() {
         </div>
         <div className="s-two-right">
           <div className="s-two-group">
-            <img src={group1} alt="Mobile App"/>
-            <img src={group2} alt="Web"/>
-            <img src={group3} alt="QA"/>
-            <img src={group4} alt="UI/UX"/>
-            <img src={group5} alt="Project Managment"/>
+            <img src={group1} alt="Mobile App" />
+            <img src={group2} alt="Web" />
+            <img src={group3} alt="QA" />
+            <img src={group4} alt="UI/UX" />
+            <img src={group5} alt="Project Managment" />
           </div>
         </div>
+      </div>
+      <div className="s-section-three">
+        <div className="s-three-content">
+          <h3 className="s-three-h3">What Makes Us Different?</h3>
+          <p className="s-three-p">
+            We provide software development services through project-specific
+            teams of experts. Among our clients are leading Ukrainian media
+            companies and foreign companies, whose projects are featured on our
+            website. Contact our experts to realize your most daring ideas of
+            custom software development!
+          </p>
+          <h4 className="s-three-h4">Our company:</h4>
+          <div className="s-three-group">
+            <div class="s-three-g-box">
+              <div class="s-three-g-number">
+                01
+                <span class="s-three-g-number-span" />
+              </div>
+              <p class="s-three-g-text">
+                Performs about 20 unique projects annually
+              </p>
+            </div>
+            <div class="s-three-g-box">
+              <div class="s-three-g-number">
+                02
+                <div class="s-three-g-number-span" />
+              </div>
+              <p class="s-three-g-text">Has more than 9 years of experience</p>
+            </div>
+            <div class="s-three-g-box">
+              <div class="s-three-g-number">
+                03
+                <span class="s-three-g-number-span" />
+              </div>
+              <p class="s-three-g-text">
+                Offers a team of professionals in any field
+              </p>
+            </div>
+            <div class="s-three-g-box">
+              <div class="s-three-g-number">
+                04
+                <span class="s-three-g-number-span" />
+              </div>
+              <p class="s-three-g-text">
+                Provides free consultations on your project
+              </p>
+            </div>
+          </div>
+        </div>
+        <h1 className="s-three-h1">FAQ</h1>
+      </div>
+      <div className="s-section-four">
+        <h2 className="s-four-h2">Frequently Asked Questions</h2>
+        <FAQ />
+        <h1 className="s-four-h1">Contact us</h1>
+      </div>
+      <div className="s-section-five">
+        <ClientForm />
       </div>
     </div>
   );
