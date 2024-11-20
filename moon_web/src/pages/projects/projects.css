@@ -81,7 +81,7 @@
   width: 1130px;
   height: 244px;
   left: 770px;
-  top: 2660px;
+  top: 2667px;
   color: rgb(127, 157, 221);
   font-family: Montserrat Alternates;
   font-size: 200px;
@@ -100,4 +100,9 @@
   height: 553px;
   margin-right: 102px;
   margin-bottom: 102px;
+}
+.p-section-three{
+  width: 100%;
+  max-width: 1920px;
+  height: 1080px;
 }

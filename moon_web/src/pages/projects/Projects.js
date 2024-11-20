@@ -4,6 +4,7 @@ import project1 from "./img/project1.png";
 import project2 from "./img/project2.png";
 import project3 from "./img/project3.png";
 import project4 from "./img/project4.png";
+import ClientForm from "../../modules/clientForm/ClientForm";
 
 export default function Projects() {
   return (
@@ -27,6 +28,9 @@ export default function Projects() {
           <img src={project4} alt="Project 4" />
         </div>
         <h1 className="p-two-h1">Contact us</h1>
+      </div>
+      <div className="p-section-three">
+        <ClientForm />
       </div>
     </div>
   );

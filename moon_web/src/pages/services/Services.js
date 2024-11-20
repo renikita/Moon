@@ -70,22 +70,8 @@ export default function Services() {
           </p>
           <h4 className="s-three-h4">Our company:</h4>
           <div className="s-three-group">
-            <div class="s-three-g-box">
-              <div class="s-three-g-number">
-                01
-                <span class="s-three-g-number-span" />
-              </div>
-              <p class="s-three-g-text">
-                Performs about 20 unique projects annually
-              </p>
-            </div>
-            <div class="s-three-g-box">
-              <div class="s-three-g-number">
-                02
-                <div class="s-three-g-number-span" />
-              </div>
-              <p class="s-three-g-text">Has more than 9 years of experience</p>
-            </div>
+            
+             
             <div class="s-three-g-box">
               <div class="s-three-g-number">
                 03
