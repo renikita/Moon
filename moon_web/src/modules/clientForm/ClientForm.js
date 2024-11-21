@@ -14,7 +14,7 @@ export default function ClientForm() {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;                                  
+    const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
@@ -101,7 +101,11 @@ export default function ClientForm() {
           </div>
           <div className="form-right">
             <div className="form-group-message">
-              <label>A few words about you or your project</label>
+              <label>
+                A few words
+                <br />
+                about you or your project
+              </label>
               <textarea
                 name="message"
                 value={formData.message}

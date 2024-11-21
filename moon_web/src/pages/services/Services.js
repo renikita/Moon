@@ -5,6 +5,10 @@ import group2 from "./img/group2.png";
 import group3 from "./img/group3.png";
 import group4 from "./img/group4.png";
 import group5 from "./img/group5.png";
+import num1 from "./img/num1.png";
+import num2 from "./img/num2.png";
+import num3 from "./img/num3.png";
+import num4 from "./img/num4.png";
 import FAQ from "../../layouts/faq/FAQ";
 import ClientForm from "../../modules/clientForm/ClientForm";
 
@@ -70,22 +74,24 @@ export default function Services() {
           </p>
           <h4 className="s-three-h4">Our company:</h4>
           <div className="s-three-group">
-            
-             
             <div class="s-three-g-box">
-              <div class="s-three-g-number">
-                03
-                <span class="s-three-g-number-span" />
-              </div>
+              <img className="s-three-g-number" src={num1} alt="one" />
+              <p class="s-three-g-text">
+                Performs about 20 unique projects annually
+              </p>
+            </div>
+            <div class="s-three-g-box">
+              <img className="s-three-g-number" src={num2} alt="two" />
+              <p class="s-three-g-text">Has more than 9 years of experience</p>
+            </div>
+            <div class="s-three-g-box">
+              <img className="s-three-g-number" src={num3} alt="thre" />
               <p class="s-three-g-text">
                 Offers a team of professionals in any field
               </p>
             </div>
             <div class="s-three-g-box">
-              <div class="s-three-g-number">
-                04
-                <span class="s-three-g-number-span" />
-              </div>
+              <img className="s-three-g-number" src={num4} alt="four" />
               <p class="s-three-g-text">
                 Provides free consultations on your project
               </p>
