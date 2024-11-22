@@ -65,6 +65,28 @@
   font-family: "JostRegular";
   z-index: 1;
 }
+/* Загальний стиль для навігації */
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-size: 28px;
+  font-family: "Jost";
+  transition: color 0.3s ease;
+}
+
+/* Стиль для активної вкладки */
+.nav-link.active {
+  /* color: #357ABD; */
+  font-weight: bold;
+  border-bottom: 3px solid #35435E; /* Лінія під активною вкладкою */
+}
+
+/* Для мобільного меню */
+.nav-links-mobile .nav-link.active {
+  color: #35435E;
+  font-weight: bold;
+}
+
 
 @media (max-width: 768px) {
   .nav-links {
