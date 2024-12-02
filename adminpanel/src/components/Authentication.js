@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from "react";
+import axios from 'axios';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = 'http://localhost:8080/adminpage/admin';
+const REGISTER_URL = 'http://localhost:8080/auth/reg';
 
 const Authentication = () => {
     const userRef = useRef();
@@ -44,30 +45,24 @@ const Authentication = () => {
         e.preventDefault();
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2) {
-            setErrMsg("Invalid Entry");
-            return;
-        }
+        
         try {
-            const response = await fetch(REGISTER_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: user, password: pwd }),
-                credentials: 'include'
-            });
-            if (!response.ok) {
-                throw new Error('Registration failed');
-            }
-            const data = await response.json();
-            console.log(data);
+            const response = await axios.post(REGISTER_URL, 
+                JSON.stringify({ login: user, password: pwd }), 
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(response.data);
             setSuccess(true);
             setUser('');
             setPwd('');
             setMatchPwd('');
         } catch (err) {
-            if (!err.message) {
+            if (!err.response) {
                 setErrMsg('No Server Response');
-            } else if (err.message === 'Registration failed') {
+            } else if (err.response.status === 409) {
                 setErrMsg('Username Taken');
             } else {
                 setErrMsg('Registration Failed');
@@ -138,11 +133,8 @@ const Authentication = () => {
                             </p>
                         </div>
 
-                    
-
                         <button className="btn btn-primary mt-3">Sign Up</button>
                     </form>
-                
                 </section>
             )}
         </>
