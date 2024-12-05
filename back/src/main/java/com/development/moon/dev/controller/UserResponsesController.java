@@ -59,7 +59,7 @@ public class UserResponsesController {
         if (userResponses == null){
             throw new UserResponsesValidationException(("User with id " + id + " not found"));
         }
-        return userResponsesService.deleteById(id) ? "Success!" : "Deleting not completed.";
+        return userResponsesService.deleteById(id) ? "Deleting not completed." : "Success!";
 
     }
 }

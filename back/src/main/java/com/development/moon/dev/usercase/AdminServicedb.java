@@ -35,6 +35,6 @@ public class AdminServicedb implements AdminService {
     @Override
     public Admin findByReg(String login)
     {
-        return adminRepository.findByReg(login);
+        return adminRepository.findByLogin(login);
     }
 }
