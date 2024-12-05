@@ -6,7 +6,7 @@ import Navbar from "./layout/Navbar";
 import Home from "./pages/Home";
 
 import Authentication from "./components/Authentication"; 
-
+import Workspace from "./components/ViewResponce"; 
 
 function App() {
   return (
@@ -15,7 +15,9 @@ function App() {
           <Navbar />
           <Routes>
             <Route exact path="/auth" element={<Authentication />} /> 
+            <Route exact path="/workspace" element={<Workspace />} /> 
             <Route exact path="/" element={<Home />} />
+            
           </Routes>
         </Router>
     </div>

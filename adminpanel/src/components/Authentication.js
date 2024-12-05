@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import axios from 'axios';
+import "./authentication.css";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = 'http://localhost:8080/auth/reg';
+const LOGIN_URL = 'http://localhost:8080/auth/reg';
 
 const Authentication = () => {
     const userRef = useRef();
@@ -22,32 +21,18 @@ const Authentication = () => {
     const [matchFocus, setMatchFocus] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
+    
 
     useEffect(() => {
         userRef.current.focus();
     }, [])
 
-    useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
-
-    useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
-        setValidMatch(pwd === matchPwd);
-    }, [pwd, matchPwd])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const v1 = USER_REGEX.test(user);
-        const v2 = PWD_REGEX.test(pwd);
         
         try {
-            const response = await axios.post(REGISTER_URL, 
+            const response = await axios.post(LOGIN_URL, 
                 JSON.stringify({ login: user, password: pwd }), 
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -55,15 +40,12 @@ const Authentication = () => {
                 }
             );
             console.log(response.data);
-            setSuccess(true);
-            setUser('');
-            setPwd('');
-            setMatchPwd('');
+            if (response.status === 200) {
+                window.location.href = '/workspace';
+            }
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response.status === 409) {
-                setErrMsg('Username Taken');
             } else {
                 setErrMsg('Registration Failed');
             }
@@ -72,72 +54,53 @@ const Authentication = () => {
     }
 
     return (
-        <>
-            {success ? (
-                <section className="container mt-5">
-                    <h1>Success!</h1>
-                    <p>
-                        <a href="/login">Sign In</a>
-                    </p>
-                </section>
-            ) : (
-                <section className="container mt-5">
-                    <p ref={errRef} className={errMsg ? "alert alert-danger" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="username">
-                                Login:
-                            </label>
-                            <input
-                                type="text"
-                                id="username"
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={(e) => setUser(e.target.value)}
-                                value={user}
-                                required
-                                aria-invalid={validName ? "false" : "true"}
-                                aria-describedby="uidnote"
-                                onFocus={() => setUserFocus(true)}
-                                onBlur={() => setUserFocus(false)}
-                                className="form-control"
-                            />
-                            <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                                4 to 24 characters.<br />
-                                Must begin with a letter.<br />
-                                Letters, numbers, underscores, hyphens allowed.
-                            </p>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="password">
-                                Password:
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                onChange={(e) => setPwd(e.target.value)}
-                                value={pwd}
-                                required
-                                aria-invalid={validPwd ? "false" : "true"}
-                                aria-describedby="pwdnote"
-                                onFocus={() => setPwdFocus(true)}
-                                onBlur={() => setPwdFocus(false)}
-                                className="form-control"
-                            />
-                            <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                                8 to 24 characters.<br />
-                                Must include uppercase and lowercase letters, a number and a special character.<br />
-                                Allowed special characters: ! @ # $ %
-                            </p>
-                        </div>
-
-                        <button className="btn btn-primary mt-3">Sign Up</button>
-                    </form>
-                </section>
-            )}
-        </>
+        <div className="container AuthPage">
+            <section>
+                <p ref={errRef} className={errMsg ? "alert alert-danger" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <h1 className="text-dark text-center">Login</h1>
+                <p className="text-muted text-center">Please login with your details</p>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="username" className="text-dark">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="uidnote"
+                            onFocus={() => setUserFocus(true)}
+                            onBlur={() => setUserFocus(false)}
+                            className="form-control"
+                            
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password" className="text-dark">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                            aria-invalid={validPwd ? "false" : "true"}
+                            aria-describedby="pwdnote"
+                            onFocus={() => setPwdFocus(true)}
+                            onBlur={() => setPwdFocus(false)}
+                            className="form-control"
+                        />
+                    </div>
+                    <a href="/forgot-password" className="text-primary">Forgot password?</a>
+                    <div className="text-center mt-2">
+                        <button className="btn btn-secondary">Login</button>
+                    </div>
+                    <a href="/go-back" className="text-center text-dark d-block mt-3">Go back</a>
+                </form>
+            </section>
+        </div>
     )
 }
 
