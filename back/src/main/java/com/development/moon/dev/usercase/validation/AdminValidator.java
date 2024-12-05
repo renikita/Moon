@@ -1,7 +1,6 @@
 package com.development.moon.dev.usercase.validation;
 
 import com.development.moon.dev.model.Admin;
-
 import com.development.moon.dev.service.AdminService;
 import com.development.moon.dev.usercase.exception.AdminValidationException;
 import com.development.moon.dev.usercase.exception.UserResponsesValidationException;
@@ -10,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static io.micrometer.common.util.StringUtils.isBlank;
+
+/**
+ * AdminValidator is a component that provides validation methods for Admin entities.
+ */
 @Component
 public class AdminValidator {
 
@@ -18,28 +21,47 @@ public class AdminValidator {
 
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Constructs an AdminValidator with the specified PasswordEncoder.
+     *
+     * @param passwordEncoder the PasswordEncoder to use for password validation
+     */
     public AdminValidator(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
-
-    public void validateCreateAdmin(final Admin admin){
-        if(admin == null) throw new AdminValidationException("Admin should not be null");
+    /**
+     * Validates the creation of an Admin entity.
+     *
+     * @param admin the Admin entity to validate
+     * @throws AdminValidationException if the Admin entity is null or has invalid fields
+     */
+    public void validateCreateAdmin(final Admin admin) {
+        if (admin == null) throw new AdminValidationException("Admin should not be null");
         if (isBlank(admin.getLogin())) throw new AdminValidationException("Login should not be null");
         if (isBlank(admin.getName())) throw new AdminValidationException("Name should not be null");
     }
 
-    public void validatePasswordAdmin(final Admin admin, final String password){
+    /**
+     * Validates the password of an Admin entity.
+     *
+     * @param admin the Admin entity to validate
+     * @param password the password to validate
+     * @throws AdminValidationException if the password is incorrect
+     */
+    public void validatePasswordAdmin(final Admin admin, final String password) {
         if (!passwordEncoder.matches(password, admin.getPassword())) throw new AdminValidationException("Incorrect password");
-
-
     }
 
-    public void validateNameTheSameAdmin(final Admin admin){
-        if( adminService.findAll().stream().anyMatch(x ->
-                admin.getLogin().equals(x.getLogin()))
-        )
+    /**
+     * Validates that the login of the Admin entity is unique.
+     *
+     * @param admin the Admin entity to validate
+     * @throws UserResponsesValidationException if the login is already used
+     */
+    public void validateNameTheSameAdmin(final Admin admin) {
+        if (adminService.findAll().stream().anyMatch(x -> admin.getLogin().equals(x.getLogin()))) {
             throw new UserResponsesValidationException("This name is used.");
+        }
     }
-
 }

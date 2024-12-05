@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * UserResponsesController is a REST controller that handles HTTP requests for managing UserResponses entities.
+ */
 @RestController
 @RequestMapping("/response")
 @CrossOrigin("http://localhost:3000")
@@ -21,17 +24,35 @@ public class UserResponsesController {
     @Autowired
     UserResValidator userResValidator;
 
+    /**
+     * Saves a new UserResponses entity.
+     *
+     * @param userResponses the UserResponses entity to save
+     * @return the saved UserResponses entity
+     */
     @PostMapping("/user")
     UserResponses UR(@RequestBody UserResponses userResponses) {
         userResValidator.validateNameTheSameUserResponses(userResponses);
         return userResponsesService.save(userResponses);
     }
 
+    /**
+     * Retrieves all UserResponses entities.
+     *
+     * @return a list of all UserResponses entities
+     */
     @GetMapping("/users")
     List<UserResponses> getAllUserResponses(){
         return userResponsesService.findAll();
     }
 
+    /**
+     * Retrieves a UserResponses entity by its ID.
+     *
+     * @param id the ID of the UserResponses entity to retrieve
+     * @return the retrieved UserResponses entity
+     * @throws UserResponsesValidationException if the UserResponses entity is not found
+     */
     @GetMapping("/user/{id}")
     UserResponses getUserResponsesById(@PathVariable Integer id) {
         UserResponses userResponses = userResponsesService.findById(id);
@@ -41,6 +62,13 @@ public class UserResponsesController {
         return userResponses;
     }
 
+    /**
+     * Updates an existing UserResponses entity by its ID.
+     *
+     * @param userResponses the UserResponses entity with updated information
+     * @param id the ID of the UserResponses entity to update
+     * @return the updated UserResponses entity
+     */
     @PutMapping("/user/{id}")
     UserResponses updateUserById(@RequestBody UserResponses userResponses, @PathVariable Integer id){
         UserResponses UpdateUserResponses = userResponsesService.findById(id);
@@ -53,6 +81,13 @@ public class UserResponsesController {
         return userResponsesService.save(UpdateUserResponses);
     }
 
+    /**
+     * Deletes a UserResponses entity by its ID.
+     *
+     * @param id the ID of the UserResponses entity to delete
+     * @return a success message if the deletion was successful, otherwise an error message
+     * @throws UserResponsesValidationException if the UserResponses entity is not found
+     */
     @DeleteMapping("user/{id}")
     String deleteUserResponsesById(@PathVariable Integer id){
         UserResponses userResponses = userResponsesService.findById(id);
@@ -60,6 +95,5 @@ public class UserResponsesController {
             throw new UserResponsesValidationException(("User with id " + id + " not found"));
         }
         return userResponsesService.deleteById(id) ? "Deleting not completed." : "Success!";
-
     }
 }
