@@ -39,7 +39,7 @@ function ViewResponse() {
   const handleDelete = (id) => {
     axios.delete(`${DELETE_USER_URL}${id}`)
       .then((response) => {
-        alert(response.data);
+        console.log("Deleting: " + response.data);
         setUsers(users.filter((user) => user.id !== id));
       })
       .catch((error) => {
