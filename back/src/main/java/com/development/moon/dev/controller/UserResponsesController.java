@@ -8,6 +8,7 @@ import com.development.moon.dev.usercase.validation.UserResValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class UserResponsesController {
     @PostMapping("/user")
     UserResponses UR(@RequestBody UserResponses userResponses) {
         userResValidator.validateNameTheSameUserResponses(userResponses);
+        userResponses.setResponse_time(new Date());
         return userResponsesService.save(userResponses);
     }
 
@@ -78,6 +80,7 @@ public class UserResponsesController {
         UpdateUserResponses.setNumber(userResponses.getNumber());
         UpdateUserResponses.setMessage_res(userResponses.getMessage_res());
         UpdateUserResponses.setResponse_time(userResponses.getResponse_time());
+        UpdateUserResponses.setStatus(userResponses.getStatus());
         return userResponsesService.save(UpdateUserResponses);
     }
 

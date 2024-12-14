@@ -26,4 +26,5 @@ public class UserResponses {
     private String number;
     private String message_res;
     private Date response_time;
+    private Integer status;
 }

@@ -27,7 +27,7 @@ public class AuthController {
      * @param loginRequest the login request containing login and password
      * @return a success message if the login is successful
      */
-    @PostMapping("/reg")
+    @PostMapping("/login")
     public String Login(@RequestBody LoginRequest loginRequest) {
         Admin checkAdmin = adminService.findByReg(loginRequest.getLogin());
         adminValidator.validatePasswordAdmin(checkAdmin, loginRequest.getPassword());
