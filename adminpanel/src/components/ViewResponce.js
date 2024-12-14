@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ViewResponse.css";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const GET_ALL_USERS_URL = 'http://localhost:8080/response/users';
 const DELETE_USER_URL = 'http://localhost:8080/response/user/';
@@ -10,6 +11,16 @@ function ViewResponse() {
   const [search, setSearch] = useState("");
   const [contextMenu, setContextMenu] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token) {
+      setAuthorized(true);
+    } else {
+      setAuthorized(false);
+    }
+  }, []);
 
   useEffect(() => {
     axios.get(GET_ALL_USERS_URL)
@@ -48,6 +59,19 @@ function ViewResponse() {
     handleCloseContextMenu();
   };
 
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 1:
+        return <span className="badge text-bg-warning">In order</span>;
+      case 2:
+        return <span className="badge text-bg-success">Checked</span>;
+      case 3:
+        return <span className="badge text-bg-dark">Declined</span>;
+      default:
+        return <span className="badge text-bg-danger">Unchecked</span>;
+    }
+  };
+
   const filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -55,6 +79,7 @@ function ViewResponse() {
   );
 
   return (
+    authorized ?
     <div className="view-response">
       <input
         type="text"
@@ -72,6 +97,7 @@ function ViewResponse() {
             <th>Number</th>
             <th>Message</th>
             <th>Response Time</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -86,6 +112,7 @@ function ViewResponse() {
               <td>{user.number}</td>
               <td>{user.message_res}</td>
               <td>{new Date(user.response_time).toLocaleString()}</td>
+              <td>{getStatusBadge(user.status)}</td>
             </tr>
           ))}
         </tbody>
@@ -104,6 +131,7 @@ function ViewResponse() {
         </div>
       )}
     </div>
+    : <h1 className="access-denied">Access Denied</h1>
   );
 }
 
