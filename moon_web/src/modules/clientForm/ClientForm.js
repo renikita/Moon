@@ -9,8 +9,8 @@ export default function ClientForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phoneNumber: "",
-    message: "",
+    number: "",
+    message_res: "",
   });
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ export default function ClientForm() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8080/api/submit", formData)
+      .post("http://localhost:8080/response/user", formData)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
         alert("Your message has been sent!");
@@ -92,8 +92,8 @@ export default function ClientForm() {
               <label>Your Phone Number</label>
               <input
                 type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
+                name="number"
+                value={formData.number}
                 onChange={handleChange}
                 placeholder="Phone number"
               />
@@ -107,8 +107,8 @@ export default function ClientForm() {
                 about you or your project
               </label>
               <textarea
-                name="message"
-                value={formData.message}
+                name="message_res"
+                value={formData.message_res}
                 onChange={handleChange}
                 placeholder="Message"
                 rows="4"
