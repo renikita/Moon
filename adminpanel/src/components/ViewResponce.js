@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./ViewResponse.css";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const GET_ALL_USERS_URL = 'http://localhost:8080/response/users';
 const DELETE_USER_URL = 'http://localhost:8080/response/user/';
+const UPDATE_USER_URL = 'http://localhost:8080/response/user/';
 
 function ViewResponse() {
   const [users, setUsers] = useState([]);
@@ -12,6 +14,16 @@ function ViewResponse() {
   const [contextMenu, setContextMenu] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    number: '',
+    message_res: '',
+    response_time: '',
+    status: 0
+  });
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -26,9 +38,11 @@ function ViewResponse() {
     axios.get(GET_ALL_USERS_URL)
       .then((response) => {
         setUsers(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("There was an error fetching the users!", error);
+        setLoading(false);
       });
   }, []);
 
@@ -39,9 +53,11 @@ function ViewResponse() {
   const handleContextMenu = (event, user) => {
     event.preventDefault();
     setSelectedUser(user);
+    const x = Math.min(event.clientX, window.innerWidth - 300); 
+    const y = Math.min(event.clientY, window.innerHeight - 150);
     setContextMenu({
-      x: event.clientX,
-      y: event.clientY,
+      x,
+      y,
     });
   };
 
@@ -57,6 +73,50 @@ function ViewResponse() {
         console.error("There was an error deleting the user!", error);
       });
     handleCloseContextMenu();
+  };
+
+  const handleUpdateStatus = (status) => {
+    const updatedUser = { ...selectedUser, status };
+    axios.put(`${UPDATE_USER_URL}${selectedUser.id}`, updatedUser)
+      .then((response) => {
+        setUsers(users.map((user) => (user.id === selectedUser.id ? response.data : user)));
+      })
+      .catch((error) => {
+        console.error("There was an error updating the user status!", error);
+      });
+    handleCloseContextMenu();
+  };
+
+  const handleEdit = () => {
+    setFormData({
+      name: selectedUser.name,
+      email: selectedUser.email,
+      number: selectedUser.number,
+      message_res: selectedUser.message_res,
+      response_time: selectedUser.response_time,
+      status: selectedUser.status
+    });
+    setShowModal(true);
+    handleCloseContextMenu();
+  };
+
+  const handleModalClose = () => setShowModal(false);
+
+  const handleModalSave = () => {
+    const updatedUser = { ...selectedUser, ...formData };
+    axios.put(`${UPDATE_USER_URL}${selectedUser.id}`, updatedUser)
+      .then((response) => {
+        setUsers(users.map((user) => (user.id === selectedUser.id ? response.data : user)));
+      })
+      .catch((error) => {
+        console.error("There was an error updating the user!", error);
+      });
+    setShowModal(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const getStatusBadge = (status) => {
@@ -90,7 +150,7 @@ function ViewResponse() {
       />
       <table className="user-table">
         <thead>
-          <tr>
+          <tr class="table-primary">
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
@@ -101,20 +161,32 @@ function ViewResponse() {
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map((user) => (
-            <tr
-              key={user.id}
-              onContextMenu={(e) => handleContextMenu(e, user)}
-            >
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.number}</td>
-              <td>{user.message_res}</td>
-              <td>{new Date(user.response_time).toLocaleString()}</td>
-              <td>{getStatusBadge(user.status)}</td>
-            </tr>
-          ))}
+          {loading ? (
+            Array.from({ length: 6 }).map((_, index) => (
+              <tr key={index}>
+                <td colSpan="7">
+                  <div className="placeholder-glow">
+                    <span className="placeholder col-12"></span>
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            filteredUsers.map((user) => (
+              <tr
+                key={user.id}
+                onContextMenu={(e) => handleContextMenu(e, user)}
+              >
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.number}</td>
+                <td>{user.message_res}</td>
+                <td>{new Date(user.response_time).toLocaleString()}</td>
+                <td>{getStatusBadge(user.status)}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
 
@@ -124,12 +196,101 @@ function ViewResponse() {
           style={{ top: contextMenu.y, left: contextMenu.x }}
           onMouseLeave={handleCloseContextMenu}
         >
-          <button onClick={() => alert(`Edit User: ${selectedUser.id}`)}>
+          <button onClick={handleEdit}>
             Edit
           </button>
+          <div className="dropdown">
+            <button className="dropdown-toggle" data-bs-toggle="dropdown">
+              Set Status
+            </button>
+            <ul className="dropdown-menu">
+              <li><button className="dropdown-item" onClick={() => handleUpdateStatus(1)}>In order</button></li>
+              <li><button className="dropdown-item" onClick={() => handleUpdateStatus(2)}>Checked</button></li>
+              <li><button className="dropdown-item" onClick={() => handleUpdateStatus(3)}>Declined</button></li>
+              <li><button className="dropdown-item" onClick={() => handleUpdateStatus(0)}>Unchecked</button></li>
+            </ul>
+          </div>
           <button onClick={() => handleDelete(selectedUser.id)}>Delete</button>
+          
         </div>
       )}
+
+      <Modal show={showModal} onHide={handleModalClose} scrollable>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formNumber">
+              <Form.Label>Number</Form.Label>
+              <Form.Control
+                type="text"
+                name="number"
+                value={formData.number}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formMessage">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                type="text"
+                name="message_res"
+                value={formData.message_res}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formResponseTime">
+              <Form.Label>Response Time</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                name="response_time"
+                value={formData.response_time}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formStatus">
+              <Form.Label>Status</Form.Label>
+              <Form.Control
+                as="select"
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+              >
+                <option value={0}>Unchecked</option>
+                <option value={1}>In order</option>
+                <option value={2}>Checked</option>
+                <option value={3}>Declined</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleModalSave}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
     : <h1 className="access-denied">Access Denied</h1>
   );
