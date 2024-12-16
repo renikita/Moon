@@ -7,6 +7,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 const GET_ALL_USERS_URL = 'http://localhost:8080/response/users';
 const DELETE_USER_URL = 'http://localhost:8080/response/user/';
 const UPDATE_USER_URL = 'http://localhost:8080/response/user/';
+axios.defaults.withCredentials = true;
 
 function ViewResponse() {
   const [users, setUsers] = useState([]);

@@ -30,8 +30,8 @@ const Authentication = () => {
             );
             console.log(response.data);
             if (response.status === 200) {
-                Cookies.set('token', response.data.token); 
-                window.location.href = '/admin/workspace';
+                Cookies.set('session', response.data.sessionId); 
+                window.location.href = '/admin/response-dashboard';
             }
         } catch (err) {
             if (!err.response) {

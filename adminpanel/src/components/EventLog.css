@@ -1,0 +1,11 @@
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  .table {
+    min-width: 600px;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+  }
