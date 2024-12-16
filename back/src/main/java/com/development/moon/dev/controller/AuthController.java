@@ -1,18 +1,26 @@
 package com.development.moon.dev.controller;
 
 import com.development.moon.dev.model.Admin;
+import com.development.moon.dev.model.EventLog;
 import com.development.moon.dev.model.dto.LoginRequest;
 import com.development.moon.dev.service.AdminService;
+import com.development.moon.dev.usercase.EventLogdb;
 import com.development.moon.dev.usercase.validation.AdminValidator;
+import com.development.moon.dev.util.JSONutil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * AuthController is a REST controller that handles HTTP requests for authentication.
  */
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"}, allowCredentials = "true")
 public class AuthController {
 
     @Autowired
@@ -21,6 +29,13 @@ public class AuthController {
     @Autowired
     AdminValidator adminValidator;
 
+    @Autowired
+    JSONutil jsonutil;
+
+    EventLog eventLog;
+    @Autowired
+    private EventLogdb eventLogdb;
+
     /**
      * Handles the login request.
      *
@@ -28,9 +43,24 @@ public class AuthController {
      * @return a success message if the login is successful
      */
     @PostMapping("/login")
-    public String Login(@RequestBody LoginRequest loginRequest) {
+    @ResponseBody
+    public Map<String, String> Login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
         Admin checkAdmin = adminService.findByReg(loginRequest.getLogin());
+
+        Map<String, String> eventDetails = new HashMap<>();
+        eventDetails.put("User-Agent", request.getHeader("User-Agent"));
+        eventDetails.put("RemoteAddr", request.getRemoteAddr());
+        eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
+
+        eventLogdb.logEvent(String.valueOf(checkAdmin.getId()), checkAdmin.getName(), "logged in", jsonutil.toJSON(eventDetails));
+
         adminValidator.validatePasswordAdmin(checkAdmin, loginRequest.getPassword());
-        return "Successful registration";
+        session.setAttribute("userId", String.valueOf(checkAdmin.getId()));
+        session.setMaxInactiveInterval(120 * 60);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("sessionId", session.getId());
+        return response;
     }
 }

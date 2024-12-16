@@ -1,22 +1,30 @@
 package com.development.moon.dev.controller;
 
 import com.development.moon.dev.model.Admin;
+import com.development.moon.dev.model.EventLog;
 import com.development.moon.dev.model.UserResponses;
+import com.development.moon.dev.service.AdminService;
 import com.development.moon.dev.service.UserResponsesService;
+import com.development.moon.dev.usercase.EventLogdb;
 import com.development.moon.dev.usercase.exception.UserResponsesValidationException;
 import com.development.moon.dev.usercase.validation.UserResValidator;
+import com.development.moon.dev.util.JSONutil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UserResponsesController is a REST controller that handles HTTP requests for managing UserResponses entities.
  */
 @RestController
 @RequestMapping("/response")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"}, allowCredentials = "true")
 public class UserResponsesController {
 
     @Autowired
@@ -25,6 +33,17 @@ public class UserResponsesController {
     @Autowired
     UserResValidator userResValidator;
 
+    @Autowired
+    AdminService adminService;
+
+    @Autowired
+    JSONutil jsonutil;
+
+    EventLog eventLog;
+
+    @Autowired
+    private EventLogdb eventLogdb;
+
     /**
      * Saves a new UserResponses entity.
      *
@@ -32,9 +51,19 @@ public class UserResponsesController {
      * @return the saved UserResponses entity
      */
     @PostMapping("/user")
-    UserResponses UR(@RequestBody UserResponses userResponses) {
+    UserResponses UR(@RequestBody UserResponses userResponses, HttpServletRequest request){
         userResValidator.validateNameTheSameUserResponses(userResponses);
         userResponses.setResponse_time(new Date());
+
+
+        Map<String, String> eventDetails = new HashMap<>();
+        eventDetails.put("User-Agent", request.getHeader("User-Agent"));
+        eventDetails.put("RemoteAddr", request.getRemoteAddr());
+        eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
+
+
+        eventLogdb.logEvent(String.valueOf(userResponses.getId()), userResponses.getName(), "send form", jsonutil.toJSON(eventDetails));
+
         return userResponsesService.save(userResponses);
     }
 
@@ -72,7 +101,16 @@ public class UserResponsesController {
      * @return the updated UserResponses entity
      */
     @PutMapping("/user/{id}")
-    UserResponses updateUserById(@RequestBody UserResponses userResponses, @PathVariable Integer id){
+    UserResponses updateUserById(@RequestBody UserResponses userResponses, @PathVariable Integer id, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String userIdString = (String) session.getAttribute("userId");
+        System.out.println(userIdString);
+        if (userIdString == null) {
+            throw new IllegalArgumentException("Session expired or user not logged in.");
+        }
+
+        Admin whoAdmin = adminService.findById(Integer.valueOf(userIdString));
+
         UserResponses UpdateUserResponses = userResponsesService.findById(id);
         userResValidator.validateCheckUserRes(UpdateUserResponses);
         UpdateUserResponses.setName(userResponses.getName());
@@ -81,6 +119,23 @@ public class UserResponsesController {
         UpdateUserResponses.setMessage_res(userResponses.getMessage_res());
         UpdateUserResponses.setResponse_time(userResponses.getResponse_time());
         UpdateUserResponses.setStatus(userResponses.getStatus());
+
+        Map<String, String> eventDetails = new HashMap<>();
+        eventDetails.put("User-Agent", request.getHeader("User-Agent"));
+        eventDetails.put("RemoteAddr", request.getRemoteAddr());
+        eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
+        eventDetails.put("Updated by", whoAdmin.getName());
+        eventDetails.put("Update user`s name", userResponses.getName() + " -> " + UpdateUserResponses.getName());
+        eventDetails.put("Update user`s email", userResponses.getEmail() + " -> " + UpdateUserResponses.getEmail());
+        eventDetails.put("Update user`s number", userResponses.getNumber() + " -> " + UpdateUserResponses.getNumber());
+        eventDetails.put("Update user`s message", userResponses.getMessage_res() + " -> " + UpdateUserResponses.getMessage_res());
+        eventDetails.put("Update user`s response time", userResponses.getResponse_time() + " -> " + UpdateUserResponses.getResponse_time());
+        eventDetails.put("Update user`s status", userResponses.getStatus() + " -> " + UpdateUserResponses.getStatus());
+
+
+
+        eventLogdb.logEvent(String.valueOf(whoAdmin.getId()), whoAdmin.getName(), "update user response", jsonutil.toJSON(eventDetails));
+
         return userResponsesService.save(UpdateUserResponses);
     }
 
@@ -92,11 +147,28 @@ public class UserResponsesController {
      * @throws UserResponsesValidationException if the UserResponses entity is not found
      */
     @DeleteMapping("user/{id}")
-    String deleteUserResponsesById(@PathVariable Integer id){
+    String deleteUserResponsesById(@PathVariable Integer id, HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        Admin whoAdmin = adminService.findById(Integer.valueOf((String) session.getAttribute("userId")));
         UserResponses userResponses = userResponsesService.findById(id);
         if (userResponses == null){
             throw new UserResponsesValidationException(("User with id " + id + " not found"));
         }
+
+        Map<String, String> eventDetails = new HashMap<>();
+        eventDetails.put("User-Agent", request.getHeader("User-Agent"));
+        eventDetails.put("RemoteAddr", request.getRemoteAddr());
+        eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
+        eventDetails.put("Deleted by", whoAdmin.getName());
+        eventDetails.put("Deleted ->", userResponses.getName());
+        eventDetails.put("Deleted email", userResponses.getEmail());
+        eventDetails.put("Deleted number", userResponses.getNumber());
+        eventDetails.put("Deleted message", userResponses.getMessage_res());
+
+
+
+        eventLogdb.logEvent(String.valueOf(whoAdmin.getId()), whoAdmin.getName(), "delete user response", jsonutil.toJSON(eventDetails));
+
         return userResponsesService.deleteById(id) ? "Deleting not completed." : "Success!";
     }
 }
