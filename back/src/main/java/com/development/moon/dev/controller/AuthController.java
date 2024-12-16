@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -48,7 +49,7 @@ public class AuthController {
         HttpSession session = request.getSession(true);
         Admin checkAdmin = adminService.findByReg(loginRequest.getLogin());
 
-        Map<String, String> eventDetails = new HashMap<>();
+        Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
         eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");

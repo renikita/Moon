@@ -14,10 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * UserResponsesController is a REST controller that handles HTTP requests for managing UserResponses entities.
@@ -56,7 +53,7 @@ public class UserResponsesController {
         userResponses.setResponse_time(new Date());
 
 
-        Map<String, String> eventDetails = new HashMap<>();
+        Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
         eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
@@ -111,16 +108,11 @@ public class UserResponsesController {
 
         Admin whoAdmin = adminService.findById(Integer.valueOf(userIdString));
 
-        UserResponses UpdateUserResponses = userResponsesService.findById(id);
-        userResValidator.validateCheckUserRes(UpdateUserResponses);
-        UpdateUserResponses.setName(userResponses.getName());
-        UpdateUserResponses.setEmail(userResponses.getEmail());
-        UpdateUserResponses.setNumber(userResponses.getNumber());
-        UpdateUserResponses.setMessage_res(userResponses.getMessage_res());
-        UpdateUserResponses.setResponse_time(userResponses.getResponse_time());
-        UpdateUserResponses.setStatus(userResponses.getStatus());
 
-        Map<String, String> eventDetails = new HashMap<>();
+
+        UserResponses UpdateUserResponses = userResponsesService.findById(id);
+
+        Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
         eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
@@ -131,6 +123,16 @@ public class UserResponsesController {
         eventDetails.put("Update user`s message", userResponses.getMessage_res() + " -> " + UpdateUserResponses.getMessage_res());
         eventDetails.put("Update user`s response time", userResponses.getResponse_time() + " -> " + UpdateUserResponses.getResponse_time());
         eventDetails.put("Update user`s status", userResponses.getStatus() + " -> " + UpdateUserResponses.getStatus());
+
+        userResValidator.validateCheckUserRes(UpdateUserResponses);
+        UpdateUserResponses.setName(userResponses.getName());
+        UpdateUserResponses.setEmail(userResponses.getEmail());
+        UpdateUserResponses.setNumber(userResponses.getNumber());
+        UpdateUserResponses.setMessage_res(userResponses.getMessage_res());
+        UpdateUserResponses.setResponse_time(userResponses.getResponse_time());
+        UpdateUserResponses.setStatus(userResponses.getStatus());
+
+
 
 
 
@@ -155,7 +157,7 @@ public class UserResponsesController {
             throw new UserResponsesValidationException(("User with id " + id + " not found"));
         }
 
-        Map<String, String> eventDetails = new HashMap<>();
+        Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
         eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");

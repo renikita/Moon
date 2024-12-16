@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.html.HTMLHtmlElement;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class AdminController {
         adminValidator.validateNameTheSameAdmin(admin);
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 
-        Map<String, String> eventDetails = new HashMap<>();
+        Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
         eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
@@ -128,7 +129,7 @@ public class AdminController {
         Admin whoAdmin = adminService.findById(Integer.valueOf((String) session.getAttribute("userId")));
         adminValidator.validateCreateAdmin(admin);
 
-        Map<String, String> eventDetails = new HashMap<>();
+        Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
         eventDetails.put("Device", request.getHeader("User-Agent").contains("Mobi") ? "Mobile" : "Desktop");
