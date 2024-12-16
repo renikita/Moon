@@ -80,7 +80,30 @@ export default function EventLog() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center">Event Logs</h2>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="text-center">Event Logs</h2>
+        <nav aria-label="Page navigation example">
+          <ul className="pagination mb-0">
+            <li className="page-item">
+              <button className="page-link" aria-label="Previous" onClick={() => paginate(currentPage - 1)}>
+                <span aria-hidden="true">&laquo;</span>
+              </button>
+            </li>
+            {[...Array(Math.ceil(filteredLogs.length / logsPerPage)).keys()].map(number => (
+              <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+                <button onClick={() => paginate(number + 1)} className="page-link">
+                  {number + 1}
+                </button>
+              </li>
+            ))}
+            <li className="page-item">
+              <button className="page-link" aria-label="Next" onClick={() => paginate(currentPage + 1)}>
+                <span aria-hidden="true">&raquo;</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <input
         type="text"
         placeholder="Search by Name or Action..."
@@ -112,27 +135,6 @@ export default function EventLog() {
           </tbody>
         </table>
       </div>
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item">
-            <button className="page-link" aria-label="Previous" onClick={() => paginate(currentPage - 1)}>
-              <span aria-hidden="true">&laquo;</span>
-            </button>
-          </li>
-          {[...Array(Math.ceil(filteredLogs.length / logsPerPage)).keys()].map(number => (
-            <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
-              <button onClick={() => paginate(number + 1)} className="page-link">
-                {number + 1}
-              </button>
-            </li>
-          ))}
-          <li className="page-item">
-            <button className="page-link" aria-label="Next" onClick={() => paginate(currentPage + 1)}>
-              <span aria-hidden="true">&raquo;</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
     </div>
   );
 }
