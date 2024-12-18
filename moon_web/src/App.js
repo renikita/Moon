@@ -11,6 +11,7 @@ import Services from './pages/services/Services'
 import Projects from './pages/projects/Projects'
 import Career from './pages/career/Career'
 import Contacts from './pages/contacts/Contacts'
+import NotFound from './pages/notFound/NotFound'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/projects' element={<Projects/>}/>
             <Route path='/career' element={<Career/>}/>
             <Route path='/contacts' element={<Contacts/>}/>
+            <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer/>
        </Router>
