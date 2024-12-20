@@ -101,7 +101,7 @@ public class UserResponsesController {
     UserResponses updateUserById(@RequestBody UserResponses userResponses, @PathVariable Integer id, HttpServletRequest request){
         HttpSession session = request.getSession();
         String userIdString = (String) session.getAttribute("userId");
-        System.out.println(userIdString);
+
         if (userIdString == null) {
             throw new IllegalArgumentException("Session expired or user not logged in.");
         }
@@ -124,7 +124,7 @@ public class UserResponsesController {
         eventDetails.put("Update user`s response time", userResponses.getResponse_time() + " -> " + UpdateUserResponses.getResponse_time());
         eventDetails.put("Update user`s status", userResponses.getStatus() + " -> " + UpdateUserResponses.getStatus());
 
-        userResValidator.validateCheckUserRes(UpdateUserResponses);
+         userResValidator.validateCheckUserRes(UpdateUserResponses);
         UpdateUserResponses.setName(userResponses.getName());
         UpdateUserResponses.setEmail(userResponses.getEmail());
         UpdateUserResponses.setNumber(userResponses.getNumber());

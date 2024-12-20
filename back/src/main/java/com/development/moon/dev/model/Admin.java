@@ -22,7 +22,7 @@ public class Admin {
     private String password;
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @ToString.Exclude
     @JoinColumn(name = "role_id")
     private Role role;

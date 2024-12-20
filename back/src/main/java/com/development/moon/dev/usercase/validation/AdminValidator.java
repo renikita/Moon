@@ -1,6 +1,7 @@
 package com.development.moon.dev.usercase.validation;
 
 import com.development.moon.dev.model.Admin;
+import com.development.moon.dev.model.Role;
 import com.development.moon.dev.service.AdminService;
 import com.development.moon.dev.usercase.exception.AdminValidationException;
 import com.development.moon.dev.usercase.exception.UserResponsesValidationException;
@@ -42,6 +43,26 @@ public class AdminValidator {
         if (isBlank(admin.getName())) throw new AdminValidationException("Name should not be null");
     }
 
+    /**
+     * Validates the creation of a Role entity.
+     *
+     * @param role the Role entity to validate
+     * @throws AdminValidationException if the Role entity is null or has invalid fields
+     */
+
+    public void validateCreateRole(final Role role) {
+        if (role == null) throw new AdminValidationException("Role should not be null");
+        if (isBlank(role.getName())) throw new AdminValidationException("Name should not be null");
+        if (isBlank(String.valueOf(role.getPermission()))) throw new AdminValidationException("Level should not be null");
+    }
+
+
+
+    public void validateNameTheSameRole(final Role role) {
+        if (adminService.findAll().stream().anyMatch(x -> role.getName().equals(x.getName()))) {
+            throw new UserResponsesValidationException("This name is used.");
+        }
+    }
     /**
      * Validates the password of an Admin entity.
      *

@@ -4,6 +4,8 @@ package com.development.moon.dev.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +21,10 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private Integer level;
+
+    @ElementCollection
+    private List<Integer> permission;
+
 
 
 
