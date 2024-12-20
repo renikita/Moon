@@ -32,6 +32,7 @@ export default function Navbar() {
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="/admin/response-dashboard">Response Dashboard</Link></li>
                   <li><Link className="dropdown-item" to="/admin/eventlog">Event Log</Link></li>
+                  <li><Link className="dropdown-item" to="/admin/permissionsettings">Permissions Settings</Link></li>
                 </ul>
               </li>
               <li className="nav-item dropdown">
@@ -40,7 +41,6 @@ export default function Navbar() {
                 </Link>
                 <ul className="dropdown-menu">
                   <li><Link className="dropdown-item" to="/admin/profile">Profile</Link></li>
-                  <li><Link className="dropdown-item" to="/admin/preferences">Preferences</Link></li>
                 </ul>
               </li>
               {session ? (
