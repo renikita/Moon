@@ -41,6 +41,7 @@ public class AdminValidator {
         if (admin == null) throw new AdminValidationException("Admin should not be null");
         if (isBlank(admin.getLogin())) throw new AdminValidationException("Login should not be null");
         if (isBlank(admin.getName())) throw new AdminValidationException("Name should not be null");
+        if(isBlank(admin.getPassword())) throw new AdminValidationException("Password should be not null");
     }
 
     /**

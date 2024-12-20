@@ -161,6 +161,8 @@ public class AdminController {
         Admin whoAdmin = adminService.findById(Integer.valueOf((String) session.getAttribute("userId")));
         adminValidator.validateCreateAdmin(admin);
 
+
+        // Logs the event of deleting an Admin entity
         Map<String, String> eventDetails = new LinkedHashMap<>();
         eventDetails.put("User-Agent", request.getHeader("User-Agent"));
         eventDetails.put("RemoteAddr", request.getRemoteAddr());
