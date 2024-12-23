@@ -1,7 +1,7 @@
 
 /* FIX [renikita]: Adjusted font paths to ensure compatibility across all devices.
    Original paths were invalid and caused fonts not to load. */
-   @font-face {
+   
 @font-face {
   font-family: 'Jost';
   src: url('../../assets/fonts/Jost-Regular.ttf') format('woff'),
