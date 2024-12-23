@@ -1,3 +1,24 @@
+
+/* FIX [renikita]: Adjusted font paths to ensure compatibility across all devices.
+   Original paths were invalid and caused fonts not to load. */
+   @font-face {
+@font-face {
+  font-family: 'Jost';
+  src: url('../../assets/fonts/Jost-Regular.ttf') format('woff'),
+       url('../../assets/fonts/Jost-Medium.ttf') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+/* FIX [renikita]: Adjusted font paths to ensure compatibility across all devices.
+   Original paths were invalid and caused fonts not to load. */
+@font-face {
+  font-family: 'Montserrat Alternates';
+  src: url('../../assets/fonts/MontserratAlternates-Bold.ttf') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 .navbar {
   width: 1920px auto;
   height: 100px;
