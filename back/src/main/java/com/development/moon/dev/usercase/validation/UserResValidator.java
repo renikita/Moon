@@ -7,8 +7,6 @@ import com.development.moon.dev.usercase.port.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 import static io.micrometer.common.util.StringUtils.isBlank;
 
 /**
@@ -53,8 +51,10 @@ public class UserResValidator {
      */
     public void validateNameTheSameUserResponses(final UserResponses userResponses) {
         if (userResponsesService.findAll().stream().anyMatch(x ->
-                userResponses.getName().equals(x.getName()))
+                userResponses.getName().equals(x.getName())
+                || userResponses.getEmail().equals(x.getEmail())
+                || userResponses.getNumber().equals(x.getNumber()))
         )
-            throw new UserResponsesValidationException("This name is used.");
+            throw new UserResponsesValidationException("This user has already used.");
     }
 }
