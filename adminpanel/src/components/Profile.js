@@ -12,10 +12,12 @@ const GET_CURRENT_ADMIN_URL = 'http://localhost:8080/adminpage/currentadmin';
 export default function Profile() {
   const [admin, setAdmin] = useState({});
   const [login, setLogin] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [message, setMessage] = useState('');
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -46,11 +48,12 @@ export default function Profile() {
     axios.get(GET_CURRENT_ADMIN_URL, { withCredentials: true })
       .then(response => {
         const userId = response.data;
-        axios.put(`${UPDATE_ADMIN_URL}${userId}`, { login, password }, { withCredentials: true })
+        axios.put(`${UPDATE_ADMIN_URL}${userId}`, { login, name , password }, { withCredentials: true })
           .then(response => {
             setAdmin(response.data);
             setMessage('Profile updated successfully');
             setShowLoginModal(false);
+            setShowNameModal(false);
             setShowPasswordModal(false);
           })
           .catch(error => {
@@ -84,6 +87,11 @@ export default function Profile() {
       });
   };
 
+  const handleShowNameModal = () => {
+    setName(admin.name); 
+    setShowNameModal(true);
+  };
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
@@ -99,6 +107,7 @@ export default function Profile() {
               </Card.Text>
               <Card.Text>
                 <strong>Name:</strong> {admin.name}
+                <Button variant="link" className="text-primary showNamelink p-0 ml-2 float-right" onClick={handleShowNameModal}>Edit</Button>
               </Card.Text>
               <Card.Text>
                 <strong>Role:</strong> {role}
@@ -139,6 +148,28 @@ export default function Profile() {
                 type="text"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" className="mt-3">
+              Save Changes
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showNameModal} onHide={() => setShowNameModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Name</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleUpdate}>
+            <Form.Group controlId="formName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </Form.Group>

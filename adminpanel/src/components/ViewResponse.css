@@ -11,9 +11,15 @@
     border-radius: 5px;
   }
 
+  .user-table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+
   .user-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px; /* Ensure table is scrollable on small screens */
   }
 
   .user-table th,
@@ -45,6 +51,10 @@
     z-index: 1000;
   }
 
+.textLabel{
+  margin-top: 2%;
+}
+
   .context-menu button {
     background: none;
     border: none;
@@ -59,6 +69,7 @@
   .context-menu button:hover {
     background-color: #f8f9fa;
   }
+
 
   .dropdown-menu {
     position: absolute;
@@ -108,10 +119,13 @@
       width: 100%;
     }
 
-    .user-table {
-      display: block;
+    .user-table-container {
       overflow-x: auto;
-      white-space: nowrap;
+      width: 100%;
+    }
+
+    .user-table {
+      min-width: 600px; /* Ensure table is scrollable on small screens */
     }
 
     .user-table th,

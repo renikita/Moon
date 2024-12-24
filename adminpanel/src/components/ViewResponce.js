@@ -26,14 +26,7 @@ function ViewResponse() {
     status: 0
   });
 
-  useEffect(() => {
-    const token = Cookies.get('token');
-    if (token) {
-      setAuthorized(true);
-    } else {
-      setAuthorized(false);
-    }
-  }, []);
+ 
 
   useEffect(() => {
     axios.get(GET_ALL_USERS_URL)
@@ -94,7 +87,7 @@ function ViewResponse() {
       email: selectedUser.email,
       number: selectedUser.number,
       message_res: selectedUser.message_res,
-      response_time: selectedUser.response_time,
+      response_time: new Date(selectedUser.response_time).toISOString().slice(0, 16), // Формат для input
       status: selectedUser.status
     });
     setShowModal(true);
@@ -128,6 +121,9 @@ function ViewResponse() {
         return <span className="badge text-bg-success">Checked</span>;
       case 3:
         return <span className="badge text-bg-dark">Declined</span>;
+        case 100:
+          return <span className="badge text-bg-info rounded-pill">Admin response</span>;
+          
       default:
         return <span className="badge text-bg-danger">Unchecked</span>;
     }
@@ -140,7 +136,7 @@ function ViewResponse() {
   );
 
   return (
-    authorized ?
+    
     <div className="view-response">
       <input
         type="text"
@@ -149,47 +145,49 @@ function ViewResponse() {
         onChange={handleSearch}
         className="search-bar"
       />
-      <table className="user-table">
-        <thead>
-          <tr class="table-primary">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Number</th>
-            <th>Message</th>
-            <th>Response Time</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
-            Array.from({ length: 6 }).map((_, index) => (
-              <tr key={index}>
-                <td colSpan="7">
-                  <div className="placeholder-glow">
-                    <span className="placeholder col-12"></span>
-                  </div>
-                </td>
-              </tr>
-            ))
-          ) : (
-            filteredUsers.map((user) => (
-              <tr
-                key={user.id}
-                onContextMenu={(e) => handleContextMenu(e, user)}
-              >
-                <td>{user.id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.number}</td>
-                <td>{user.message_res}</td>
-                <td>{new Date(user.response_time).toLocaleString()}</td>
-                <td>{getStatusBadge(user.status)}</td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+      <div className="user-table-container">
+        <table className="user-table table  table-striped">
+          <thead>
+            <tr class="table-primary">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Number</th>
+              <th>Message</th>
+              <th>Response Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              Array.from({ length: 6 }).map((_, index) => (
+                <tr key={index}>
+                  <td colSpan="7">
+                    <div className="placeholder-glow">
+                      <span className="placeholder col-12"></span>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              filteredUsers.map((user) => (
+                <tr
+                  key={user.id}
+                  onContextMenu={(e) => handleContextMenu(e, user)}
+                >
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.number}</td>
+                  <td>{user.message_res}</td>
+                  <td>{new Date(user.response_time).toLocaleString()}</td>
+                  <td>{getStatusBadge(user.status)}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
       {contextMenu && (
         <div
@@ -223,7 +221,7 @@ function ViewResponse() {
         <Modal.Body>
           <Form>
             <Form.Group controlId="formName">
-              <Form.Label>Name</Form.Label>
+              <Form.Label >Name</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
@@ -232,7 +230,7 @@ function ViewResponse() {
               />
             </Form.Group>
             <Form.Group controlId="formEmail">
-              <Form.Label>Email</Form.Label>
+              <Form.Label className="textLabel">Email</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -241,7 +239,7 @@ function ViewResponse() {
               />
             </Form.Group>
             <Form.Group controlId="formNumber">
-              <Form.Label>Number</Form.Label>
+              <Form.Label className="textLabel">Number</Form.Label>
               <Form.Control
                 type="text"
                 name="number"
@@ -250,7 +248,7 @@ function ViewResponse() {
               />
             </Form.Group>
             <Form.Group controlId="formMessage">
-              <Form.Label>Message</Form.Label>
+              <Form.Label className="textLabel">Message</Form.Label>
               <Form.Control
                 type="text"
                 name="message_res"
@@ -259,7 +257,7 @@ function ViewResponse() {
               />
             </Form.Group>
             <Form.Group controlId="formResponseTime">
-              <Form.Label>Response Time</Form.Label>
+              <Form.Label className="textLabel">Response Time</Form.Label>
               <Form.Control
                 type="datetime-local"
                 name="response_time"
@@ -268,7 +266,7 @@ function ViewResponse() {
               />
             </Form.Group>
             <Form.Group controlId="formStatus">
-              <Form.Label>Status</Form.Label>
+              <Form.Label className="textLabel">Status</Form.Label>
               <Form.Control
                 as="select"
                 name="status"
@@ -283,7 +281,7 @@ function ViewResponse() {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="justify-content-between">
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
@@ -293,7 +291,7 @@ function ViewResponse() {
         </Modal.Footer>
       </Modal>
     </div>
-    : <h1 className="access-denied">Access Denied</h1>
+    
   );
 }
 

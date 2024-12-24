@@ -21,6 +21,11 @@
   .ml-2 {
     margin-left: 0.5rem;
   }
+
+  .showNamelink{
+    text-decoration: none;
+
+  }
   
   .showloginlink{
     text-decoration: none;
