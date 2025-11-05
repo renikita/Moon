@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Moon/static/css/main.30f4cad0.css",
-    "main.js": "/Moon/static/js/main.60edb9d9.js",
+    "main.js": "/Moon/static/js/main.a368bab7.js",
     "static/media/services.png": "/Moon/static/media/services.b31bac4e0a17e40518ec.png",
     "static/media/person.png": "/Moon/static/media/person.13151583f48546d6f801.png",
     "static/media/team1.png": "/Moon/static/media/team1.1e932589f5a6e4a7797a.png",
@@ -41,10 +41,10 @@
     "static/media/logo_white.png": "/Moon/static/media/logo_white.f4bbbcfbfb2cae0372f4.png",
     "index.html": "/Moon/index.html",
     "main.30f4cad0.css.map": "/Moon/static/css/main.30f4cad0.css.map",
-    "main.60edb9d9.js.map": "/Moon/static/js/main.60edb9d9.js.map"
+    "main.a368bab7.js.map": "/Moon/static/js/main.a368bab7.js.map"
   },
   "entrypoints": [
     "static/css/main.30f4cad0.css",
-    "static/js/main.60edb9d9.js"
+    "static/js/main.a368bab7.js"
   ]
 }
