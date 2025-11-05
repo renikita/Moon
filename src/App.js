@@ -4,7 +4,7 @@ import './assets/styles/fonts.css'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Header from './layouts/header/Header';
 import Footer from './layouts/footer/Footer';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import About from './pages/about/About'
 import Services from './pages/services/Services'
@@ -16,7 +16,7 @@ import NotFound from './pages/notFound/NotFound'
 function App() {
   return (
     <div className="App">
-       <Router>
+       <Router basename={process.env.PUBLIC_URL || ''}>
         <Header/>
           <Routes>
             <Route path='/' element={<Home/>}/>
